@@ -66,7 +66,7 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
 
 ### **Raw data: (example) (`rf_signal_data.txt`)**
 
-
+```
 Time (µs), Signal
 159, 0  <- at this time the signal was a 0.  My RPI can scan at about 20 to 30 microsecond sample rate.
 231, 0
@@ -74,8 +74,9 @@ Time (µs), Signal
 296, 0
 322, 1
 347, 1
+```
 
-## **Step 2 - Process the captured signal **
+## **Step 2 - Process the captured signal**
    - Use `2-process-signal.py`  Python script to process the captured file.
 
 
@@ -88,7 +89,7 @@ The `parsed_rf_signal.txt` file contains the processed output from the captured 
     * `1` indicates a high signal (ON).
 * **Duration (µs):**
     * The duration of the signal state in microseconds.
-
+```
 Here's an example from the file:
 Signal, Duration (µs)
 1, 344   <- this is a 0  (short 1 and long 0)
@@ -105,12 +106,12 @@ Signal, Duration (µs)
 0, 1156
 1, 344   < preamble? >
 0, 11804 <- pause between sequences
-
-6. **Step 3 - Parse the captured signal file**
+```
+## **Step 3 - Parse the captured signal file**
    - Use `3-parse-rf-signal.py`  Python script to parse the processed file to find the sequence and codes.
    - The output provides a list of codes, hopefully they will work in the transmit.
 
-### 📊 **Understanding the output of the Parsed Signal Data**
+### **Understanding the output of the Parsed Signal Data**
 
 $ python 3-parse-rf-signal.py
 
@@ -120,6 +121,7 @@ $ python 3-parse-rf-signal.py
 🔹 Step 2: Processing signal pairs...
 
 🔹 Final Decoded Sequences:
+```
 111000000111001110100001 - 24  <- this is the code for the generator, unique or not, don't know if the use all the same code.
 111000000111001110100001 - 24
 111000000111001110100001 - 24
@@ -129,9 +131,9 @@ $ python 3-parse-rf-signal.py
 111000000111001110100001 - 24
 111000000111001110100001 - 24
 111000000111001110100001 - 24
+```
 
-
-## 7. **Step 4 - Transmit the discovered code**
+## **Step 4 - Transmit the discovered code**
    - Repeat step 1, 2 and 3 for the stop code.  Update the script with the start and stop code. 
    - Use `4-transmit.py start or stop`  To send the code via RF433 to the generator, hopefully it will work.
    - If not, you need to adjust the timing of the signals, the low, the high, un microseconds, your RPI may be faster or slower than mine (3B)
@@ -140,7 +142,7 @@ $ python 3-parse-rf-signal.py
 ### ✅ **Timing is everything - precise sleep**
 
 This took a while, either my RPI is too slow, but I time.sleep() didn't cut it, had to use a precision sleep and it worked.
-
+```
 $ python 4-transmit.py  stop
 
 🚀 Starting transmission...
@@ -164,7 +166,7 @@ NOTE: the actual time is what you need to adjust to make sure the timing of the 
 	- short_delay = 352           # Short pulse duration (in µs)
 	- long_delay = 1067           # Long pulse duration (in µs)
 	- extended_delay = 11812      # Extended delay (in µs)
-
+```
 
 ## ✅ **Troubleshooting**
 If you encounter issues:
