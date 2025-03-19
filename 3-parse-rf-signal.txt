@@ -1,0 +1,24 @@
+Explanation of the Code:
+
+Timing Thresholds:
+
+SHORT_MIN, SHORT_MAX: Define the duration range for a short pulse.
+LONG_MIN, LONG_MAX: Define the duration range for a long pulse.
+LONG_OFF_THRESHOLD: Defines the minimum duration of an OFF period that indicates the start of a new transmission sequence.
+File Reading:
+
+The script reads parsed RF signal data from parsed_rf_signal.txt.
+It skips the header line and parses each line, storing the signal and duration values in the signal_data list.
+It includes error handling to skip invalid lines.
+Signal Pair Processing:
+
+The script iterates through pairs of signal data entries.
+It checks for long OFF periods to identify the start of new transmission sequences.
+It applies Manchester encoding rules to determine the bit value based on the duration of the signal pairs (long-short = 1, short-long = 0).
+It skips invalid signal pairs (unexpected durations or signal orders).
+Decoded bits are appended to the sequence list, and sequences are added to the decoded_bits list when a long off period is detected, or at the end of the file.
+Decoded Sequence Output:
+
+The script prints the decoded bit sequences to the console.
+Each sequence is displayed along with its length (number of bits).
+The script effectively decodes the RF signal data into binary sequences based on the defined thresholds and encoding rules.

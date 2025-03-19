@@ -1,0 +1,39 @@
+Explanation of the Code:
+
+Imports:
+
+datetime: For date and time operations (not used in the core logic, but can be added for logging).
+RPi.GPIO: For interacting with the Raspberry Pi's GPIO pins.
+sys: For system-specific parameters and functions (not directly used but can be used for things like command line arguments).
+time: For time-related functions (e.g., getting current time, pausing).
+collections.deque: For efficient appending of data (faster than lists for growing data).
+Constants:
+
+RECEIVE_PIN: The GPIO pin number connected to the signal source.
+MAX_DURATION: The duration of the recording in seconds.
+RECEIVED_SIGNAL: A list of two deque objects to store the timestamps and signal values. deque is used because it allows fast appends.
+GPIO Initialization:
+
+GPIO.setmode(GPIO.BCM): Sets the GPIO numbering mode to BCM (Broadcom SOC channel numbers).
+GPIO.setup(RECEIVE_PIN, GPIO.IN): Configures the specified pin as an input.
+Recording Loop:
+
+start_time_ns: Records the starting time in nanoseconds.
+The while loop continues until the elapsed time exceeds MAX_DURATION.
+Inside the loop:
+current_time_ns: Gets the current time in nanoseconds.
+The elapsed time in microseconds is calculated, converted to an integer, and appended to RECEIVED_SIGNAL[0].
+The signal value from the RECEIVE_PIN is read using GPIO.input() and appended to RECEIVED_SIGNAL[1].
+Data Processing:
+
+GPIO.cleanup(): Releases the GPIO resources.
+The deque objects are converted to regular lists for easier file writing.
+File Saving:
+
+The script opens a text file named rf_signal_data.txt in write mode ("w").
+It writes a header row ("Time (µs), Signal").
+It iterates through the timestamps and signal values and writes them to the file, separated by a comma.
+Output:
+
+The script prints messages to the console indicating the start and end of recording, the number of samples recorded, and the filename where the data is saved.
+The timestamps are in microseconds, and the signal values are 0 or 1, representing the digital signal levels.

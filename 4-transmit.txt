@@ -1,0 +1,44 @@
+Explanation of the Code:
+
+Update the strat and stop code with the ones from your remote fob.
+
+Imports:
+
+time: For precise timing control.
+sys: For accessing command-line arguments.
+RPi.GPIO: For interacting with the Raspberry Pi's GPIO pins.
+Code Definitions:
+
+start: The binary code to start the transmission.
+stop: The binary code to stop the transmission.
+Timing Constants:
+
+TRANSMIT_PIN: The GPIO pin used for transmitting the signal.
+NUM_ATTEMPTS: The number of times the code will be transmitted.
+short_delay: The duration of a short pulse in microseconds.
+long_delay: The duration of a long pulse in microseconds.
+extended_delay: The delay between transmission attempts in microseconds.
+precise_sleep(delay_us) Function:
+
+Implements a busy-wait sleep for precise microsecond delays.
+Uses time.monotonic_ns() to get nanosecond-resolution time.
+Calculates the target time and loops until it's reached.
+transmit_code(code) Function:
+
+Sets up the GPIO pin for output.
+Iterates through the specified number of transmission attempts.
+Iterates through each bit in the code.
+Applies Manchester encoding:
+'0': Short pulse (HIGH) followed by a long pulse (LOW).
+'1': Long pulse (HIGH) followed by a short pulse (LOW).
+Uses precise_sleep() for accurate timing.
+Measures and prints the actual elapsed time for each bit transmission.
+Adds an extended delay between transmission attempts.
+Cleans up GPIO settings after transmission.
+if __name__ == '__main__': Block:
+
+This block is executed when the script is run directly.
+Processes command-line arguments.
+Calls the transmit_code() function for each argument.
+This allows the user to call the script with the start or stop codes, or other codes, as command line arguments.
+Example: python transmit.py start 

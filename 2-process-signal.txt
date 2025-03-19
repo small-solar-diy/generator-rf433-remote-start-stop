@@ -1,0 +1,27 @@
+Explanation of the Code:
+
+File Reading:
+
+The script reads the RF signal data from rf_signal_data.txt.
+It skips the header line and parses each line, storing the timestamps and signal values in separate lists.
+Signal Grouping:
+
+It iterates through the signal values, grouping consecutive identical values and calculating their durations.
+start_time: Keeps track of the start time of the current signal group.
+current_signal: Stores the current signal value.
+sample_count: counts the number of samples between signal changes.
+Noise Filtering:
+
+noise_sample: Defines the threshold for filtering out noise. Signal changes shorter than this threshold are considered noise.
+previous_duration, previous_signal, previous_time, previous_sample: Variables to store previous values so that the code can rollback to them if a noise signal is detected.
+If a signal change is detected and the sample_count is less than noise_sample, the code rolls back to the previous values.
+If a signal change is detected and the sample_count is greater than or equal to noise_sample, the signal and duration are saved.
+Saving Parsed Data:
+
+The grouped signal data (signal and duration) is saved to a new file named parsed_rf_signal.txt.
+The file contains a header row and each subsequent row represents a signal group.
+Output:
+
+The script prints messages to the console indicating the progress of the parsing and the filename where the parsed data is saved.
+The durations are in microseconds.
+The noise filtering logic prevents short, spurious signal changes from being recorded.
