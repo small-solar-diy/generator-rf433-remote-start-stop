@@ -1,4 +1,4 @@
-DRAFT 🛠️ Raspberry Pi 433 MHz Generator Control
+DRAFT DRAFT 🛠️ Raspberry Pi 433 MHz Generator Control
 A project to control the Westinghouse WGEN3600DFc generator using a 433 MHz remote key fob and a Raspberry Pi.
 
 🚀 Project Overview
