@@ -7,11 +7,11 @@ Using the RPI in my remote cabin, I can monitor the status of my batteries via t
 
 Why I didn't put a relay on the switch on/off? Started to take the generator apart and turns out not as easy it seems, plus extra wiring and all.  It was last resort if I could not make this work.
 
-## 🚀 **Project Overview**
+### 🚀 **Project Overview**
 This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi to simulate the signals sent by the **Westinghouse 100714A remote key fob**. The goal is to remotely start and stop the generator using custom scripts, enhancing home energy resilience during power outages or for scheduled maintenance. The remote uses **Manchester encoding**, a method to encode the clock and data of a synchronous bit stream.
 
 
-## 🔧 **Hardware**
+### 🔧 **Hardware**
 - ✅ **Westinghouse WGEN3600DFc (or any WGEN with auto start) generator** 
 - ✅ **Raspberry Pi** 
 - ✅ **433 MHz RF transmitter**
@@ -20,7 +20,7 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
   - Based on the **EV1527 encoder**
 - ✅ Jumper wires and breadboard (for prototyping)
 
-## 📚 **References and Inspiration - not repeating what they wrote **
+### 📚 **References and Inspiration - not repeating what they wrote**
 - [Super Simple Raspberry Pi 433MHz Home Automation](https://www.instructables.com/Super-Simple-Raspberry-Pi-433MHz-Home-Automation/)
 - [RF 433 MHz Raspberry Pi](https://www.instructables.com/RF-433-MHZ-Raspberry-Pi/)
 - **EV1527 Encoder Datasheet:** [EV1527.pdf](https://www.sunrom.com/download/EV1527.pdf)
@@ -28,7 +28,7 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
   - [milaq/rpi-rf](https://github.com/milaq/rpi-rf)
   - [rpi-rf on PyPi](https://pypi.org/project/rpi-rf/)
 
-## 🛠️ **Setup Instructions**
+### 🛠️ **Setup Instructions**
 1. **Create a Python Virtual Environment**
 
    - This is new to me, so took a while to get going. At a high level this is the steps.
@@ -58,13 +58,13 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
      - **DATA** → GPIO12 (or your chosen pin)
      ** I soldered an antenna 173mm (6"7/8) to both receiver and transmitter, signal was much cleaner.
 
-4. **Step 1 - Signal Capture**
+## **Step 1 - Signal Capture**
    - Use `1-collect-signal.py` to capture the remote’s signal and identify the ON/OFF codes.
 	- keep the fob start button pressed before and after the test, keep it close to the receiver
 	- later, repeat for the stop button
 	- the signal is manchester encoded, to the raw date needs to be processed and parsed
 
-## 📊 **Raw data: (example) (`rf_signal_data.txt`)**
+### **Raw data: (example) (`rf_signal_data.txt`)**
 
 
 Time (µs), Signal
@@ -75,11 +75,11 @@ Time (µs), Signal
 322, 1
 347, 1
 
-5. **Step 2 - Process the captured signal **
+## **Step 2 - Process the captured signal **
    - Use `2-process-signal.py`  Python script to process the captured file.
 
 
-## 📊 **Understanding the Parsed Signal Data (`parsed_rf_signal.txt`)**
+### **Understanding the Parsed Signal Data (`parsed_rf_signal.txt`)**
 
 The `parsed_rf_signal.txt` file contains the processed output from the captured 433 MHz signal. Each line represents a distinct pulse and its duration or pause in the signal, described by two values:
 
@@ -110,7 +110,7 @@ Signal, Duration (µs)
    - Use `3-parse-rf-signal.py`  Python script to parse the processed file to find the sequence and codes.
    - The output provides a list of codes, hopefully they will work in the transmit.
 
-## 📊 **Understanding the output of the Parsed Signal Data**
+### 📊 **Understanding the output of the Parsed Signal Data**
 
 $ python 3-parse-rf-signal.py
 
@@ -131,13 +131,13 @@ $ python 3-parse-rf-signal.py
 111000000111001110100001 - 24
 
 
-7. **Step 4 - Transmit the discovered code**
+## 7. **Step 4 - Transmit the discovered code**
    - Repeat step 1, 2 and 3 for the stop code.  Update the script with the start and stop code. 
    - Use `4-transmit.py start or stop`  To send the code via RF433 to the generator, hopefully it will work.
    - If not, you need to adjust the timing of the signals, the low, the high, un microseconds, your RPI may be faster or slower than mine (3B)
    - Note: there's no relation I can see between the ID sticker on the fob and the discovered code.
 
-## ✅ **Timing is everything - precise sleep **
+### ✅ **Timing is everything - precise sleep**
 
 This took a while, either my RPI is too slow, but I time.sleep() didn't cut it, had to use a precision sleep and it worked.
 
