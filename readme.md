@@ -16,7 +16,6 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
 - ✅ **Raspberry Pi** 
 - ✅ **433 MHz RF transmitter**
 - ✅ **Westinghouse 100714A remote key fob**
-  - FCC ID: RKWTX0201
   - Based on the **EV1527 encoder**
 - ✅ Jumper wires and breadboard (for prototyping)
 
