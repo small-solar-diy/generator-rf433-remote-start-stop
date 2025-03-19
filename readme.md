@@ -52,11 +52,11 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
      - **VCC** → 5V
      - **GND** → Ground
      - **DATA** → GPIO17 (or your chosen pin)
-	Connect the **RF receiver** to the Pi's GPIO pins:
+   - Connect the **RF receiver** to the Pi's GPIO pins:
      - **VCC** → 5V
      - **GND** → Ground
      - **DATA** → GPIO12 (or your chosen pin)
-	** I soldered an antenna 173mm (6"7/8) to both receiver and transmitter, signal was much cleaner.
+     ** I soldered an antenna 173mm (6"7/8) to both receiver and transmitter, signal was much cleaner.
 
 4. **Step 1 - Signal Capture**
    - Use `1-collect-signal.py` to capture the remote’s signal and identify the ON/OFF codes.
