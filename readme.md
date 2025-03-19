@@ -1,9 +1,11 @@
 # 🛠️ **Raspberry Pi 433 MHz Generator Control**
 A project to control the **Westinghouse WGEN3600DFc (or any WGEN with auto start) generator** using a **433 MHz remote key fob** and a **Raspberry Pi**.
 
-I'm not a coder by profession but this works, tried to document the best I could my experience.  It took a few days before I could get the timing right because of internal latency on the RPI, once I adjusted sleep timers to match the expected FR322 protocol, it all started to work.  Getting the FOB to play right next to the receiver was a big plus.
+I'm not a coder by profession but this works, tried to document the best I could my experience.  It took a few days before I could get the timing right because of internal latency on the RPI, once I adjusted sleep timers to match the expected EV1527 fixed OOK encoding protocol timing, it all started to work.  Getting the FOB to play right next to the receiver was a big plus.
 
-Using my RPI I can monitor the status of my batteries, and during the winter time, then snow covers the solar panels, I can remotely start the 
+Using the RPI in my remote cabin, I can monitor the status of my batteries via the MK3 bus on my Victron Multiplus inverter/charger (will share code once it works), and during the winter time, when the snow covers the solar panels, I can remotely start and stop the propane generator to top up the batteries.  
+
+Why I didn't put a relay on the switch on/off? Started to take the generator apart and turns out not as easy it seems, plus extra wiring and all.  It was last resort if I could not make this work.
 
 ## 🚀 **Project Overview**
 This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi to simulate the signals sent by the **Westinghouse 100714A remote key fob**. The goal is to remotely start and stop the generator using custom scripts, enhancing home energy resilience during power outages or for scheduled maintenance. The remote uses **Manchester encoding**, a method to encode the clock and data of a synchronous bit stream.
