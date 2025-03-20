@@ -14,7 +14,7 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
 ### 🔧 **Hardware**
 - ✅ **Westinghouse WGEN3600DFc (or any WGEN with auto start) generator** 
 - ✅ **Raspberry Pi** 
-- ✅ **433 MHz RF transmitter**
+- ✅ **433 MHz RF transmitter and receiver kit**
 - ✅ **Westinghouse 100714A remote key fob**
   - Based on the **EV1527 encoder**
 - ✅ Jumper wires and breadboard (for prototyping)
