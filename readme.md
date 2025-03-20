@@ -33,20 +33,32 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
    - This is new to me, so took a while to get going. At a high level this is the steps.
    
    ```bash
+   #create a project folder
+   mkdir project
+
+   # clone this repo
+    git clone git@github.com:small-solar-diy/generator-rf433-remote-start-stop.git
+
+   #setup virtual python environment
    sudo apt update
    sudo apt install python3-venv
    python3 -m venv venv
    source venv/bin/activate
+   #starting python from scratch
+   pip list
    ```
 
 2. **Install Required Libraries**
    ```bash
+   pip install RPi.GPIO
    pip install rpi-rf
    pip install gpiozero
-   + other? forgot to track... 
+   + other?? ... 
    ```
-
+   - At this point you should be able to run scripts `2-process-signal.py` using the sample rf data file.
+  
 3. **Wiring**
+   - Get a 433MHz RF Wireless Transmitter and Receiver Module Kit
    - Connect the **RF transmitter** to the Pi's GPIO pins:
      - **VCC** → 5V
      - **GND** → Ground
