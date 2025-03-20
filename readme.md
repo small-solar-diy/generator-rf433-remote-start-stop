@@ -35,6 +35,7 @@ This project utilizes a **433 MHz RF transmitter** connected to a Raspberry Pi t
    ```bash
    #create a project folder
    mkdir project
+   cd project
 
    # clone this repo
     git clone git@github.com:small-solar-diy/generator-rf433-remote-start-stop.git
